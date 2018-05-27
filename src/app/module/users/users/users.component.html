@@ -1,0 +1,82 @@
+<section class="users">
+  <div class="users-list">
+    <div class="header-bar">
+      <h4>Users</h4>
+      <div class="search">
+        <fa name="bars" class="i"></fa>
+        <fa name="search" class="i" (click)="searchForm = !searchForm"></fa>
+      </div>
+      <div class="search-field" [ngClass]="{hide: !searchForm, show: searchForm}">
+        <fa name="arrow-left" (click)="closeSearch()"></fa>
+        <input type="text" name="" value="" placeholder="Search users">
+        <fa name="times" (click)="closeSearch()"></fa>
+      </div>
+    </div><!-- header-bar -->
+    <div class="scroll-bar">
+      <ul>
+        <form  (ngSubmit)="onSubmitUserDetails()">
+          <li *ngFor="let user of users_list">
+            <div class="box" id="{{ user.id }}">
+              <div class="image">
+                <img src="http://via.placeholder.com/40x40" />
+              </div>
+              <div class="user-info">
+                <b>{{ user.name }}</b>
+                <span>{{ user.username }}</span>
+                <span>{{ user.email }}</span>
+              </div>
+            </div>
+          </li>
+        </form>
+      </ul>
+    </div>
+  </div><!-- users-list -->
+  <div class="users-elements">
+    <div class="user-album">
+      <div class="header">
+        <h4>Albums <span>Drag and Drop to Photos section</span></h4>
+        <div class="form-group">
+          <input id="select-all" type="checkbox" name="" value="">
+          <label for="select-all">Select all</label>
+        </div>
+      </div>
+      <div class="empty-text">Select a user first</div>
+      <div class="check-list">
+        <ul>
+          <li>
+            <label for="1"><input type="checkbox" id="1" /> title</label>
+            <span>1,000 Photos</span>
+          </li>
+          <li>
+            <label for="2"><input type="checkbox" id="2" /> title</label>
+            <span>1,000 Photos</span>
+          </li>
+          <li>
+            <label for="3"><input type="checkbox" id="3" /> title</label>
+            <span>1,000 Photos</span>
+          </li>
+          <li>
+            <label for="4"><input type="checkbox" id="4" /> title</label>
+            <span>1,000 Photos</span>
+          </li>
+          <li>
+            <label for="5"><input type="checkbox" id="5" /> title</label>
+            <span>1,000 Photos</span>
+          </li>
+          <li>
+            <label for="6"><input type="checkbox" id="6" /> title</label>
+            <span>1,000 Photos</span>
+          </li>
+        </ul>
+      </div>
+    </div><!-- user-album -->
+    <div class="user-photos">
+      <div class="header">
+        <h4>0 Photos</h4>
+        <div class="sort-photo">
+          <fa name="align-left"></fa>
+        </div>
+      </div>
+    </div><!-- user-photos -->
+  </div><!-- users-elements -->
+</section>
