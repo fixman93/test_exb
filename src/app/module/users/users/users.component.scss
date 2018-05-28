@@ -76,6 +76,10 @@ section.users {
           align-items: center;
           border-bottom: 1px solid rgba(0, 0, 0, 0.12);
           display: flex;
+          width: 100%;
+          border: 0;
+          background: transparent;
+          border: 0;
           padding-bottom: 15px;
           .image {
             margin-right: 15px;
@@ -156,11 +160,20 @@ section.users {
           display: flex;
           flex-flow: wrap;
           align-items: center;
+          overflow: auto;
           padding: 0;
           li {
+            margin-bottom: 16px;
             min-width: 25%;
+            button {
+              background: transparent;
+              border: 0;
+            }
             label {
-              margin-right: 50px;
+              margin-right: 30px;
+            }
+            span {
+              padding-right: 20px;
             }
           }
         }
@@ -223,4 +236,25 @@ section.users {
       }
     }
   }
+}
+
+.photos-list ul {
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-flow: wrap;
+    overflow: scroll;
+}
+
+.photos-list ul li img {
+    max-width: 100px;
+}
+
+.photos-list ul li {
+    margin: 0 5px 5px;
+}
+
+.photos-list {
+  overflow: scroll;
+  max-height: 93%;
 }

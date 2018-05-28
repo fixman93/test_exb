@@ -14,20 +14,23 @@
     </div><!-- header-bar -->
     <div class="scroll-bar">
       <ul>
-        <form  (ngSubmit)="onSubmitUserDetails()">
-          <li *ngFor="let user of users_list">
-            <div class="box" id="{{ user.id }}">
-              <div class="image">
-                <img src="http://via.placeholder.com/40x40" />
-              </div>
-              <div class="user-info">
-                <b>{{ user.name }}</b>
-                <span>{{ user.username }}</span>
-                <span>{{ user.email }}</span>
-              </div>
+        <li *ngFor="let user of users_list">
+          <form #f="ngForm"  (ngSubmit)="onSubmitUserDetails(f.value)">
+          <button class="box"   id="{{ user.id }}">
+            <input type="hidden" name="userId" ngModel #userId="ngModel" [ngModel]="user.id">
+            <div class="image">
+              <img src="http://via.placeholder.com/40x40" />
             </div>
-          </li>
-        </form>
+            <div class="user-info">
+              <!-- vratiti obican tekst -->
+              <b ><input type="text" name="name" [disabled]="true" ngModel #name="ngModel" [ngModel]="user.name"></b>
+
+              <span ><input type="text" name="username" [disabled]="true" ngModel #name="ngModel" [ngModel]="user.username"></span>
+              <span ><input type="text" name="email" [disabled]="true" ngModel #name="ngModel" [ngModel]="user.email"></span>
+            </div>
+          </button>
+          </form>
+        </li>
       </ul>
     </div>
   </div><!-- users-list -->
@@ -43,29 +46,16 @@
       <div class="empty-text">Select a user first</div>
       <div class="check-list">
         <ul>
-          <li>
-            <label for="1"><input type="checkbox" id="1" /> title</label>
-            <span>1,000 Photos</span>
-          </li>
-          <li>
-            <label for="2"><input type="checkbox" id="2" /> title</label>
-            <span>1,000 Photos</span>
-          </li>
-          <li>
-            <label for="3"><input type="checkbox" id="3" /> title</label>
-            <span>1,000 Photos</span>
-          </li>
-          <li>
-            <label for="4"><input type="checkbox" id="4" /> title</label>
-            <span>1,000 Photos</span>
-          </li>
-          <li>
-            <label for="5"><input type="checkbox" id="5" /> title</label>
-            <span>1,000 Photos</span>
-          </li>
-          <li>
-            <label for="6"><input type="checkbox" id="6" /> title</label>
-            <span>1,000 Photos</span>
+          <li *ngFor="let album of album_list; let x = index">
+            <form #check="ngForm" (ngSubmit)="onSubmitAlbum(check.value)">
+            <button>
+              <label for="{{ album.albumId }}">
+                <input type="checkbox" name="albumId" ngModel #albumId="ngModel" [ngModel]="album.albunId" id="{{ album.albumId }}"/>
+                {{ album.title }}
+              </label>
+                <span>{{ x }} Photos</span>
+            </button>
+            </form>
           </li>
         </ul>
       </div>
@@ -76,6 +66,13 @@
         <div class="sort-photo">
           <fa name="align-left"></fa>
         </div>
+      </div>
+      <div class="photos-list">
+        <ul>
+          <li *ngFor="let photo of photos_list">
+            <img src="{{ photo.url }}" />
+          </li>
+        </ul>
       </div>
     </div><!-- user-photos -->
   </div><!-- users-elements -->

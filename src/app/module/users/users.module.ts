@@ -3,13 +3,16 @@ import { CommonModule } from '@angular/common';
 import { UsersComponent } from './users/users.component';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule }   from '@angular/forms';
+
 
 
 @NgModule({
   imports: [
     CommonModule,
     AngularFontAwesomeModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   declarations: [UsersComponent],
   exports: [UsersComponent],
