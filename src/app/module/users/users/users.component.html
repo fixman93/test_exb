@@ -8,28 +8,24 @@
       </div>
       <div class="search-field" [ngClass]="{hide: !searchForm, show: searchForm}">
         <fa name="arrow-left" (click)="closeSearch()"></fa>
-        <input type="text" name="" value="" placeholder="Search users">
+        <input [(ngModel)]="searchText" placeholder="Search users">
         <fa name="times" (click)="closeSearch()"></fa>
       </div>
     </div><!-- header-bar -->
     <div class="scroll-bar">
       <ul>
-        <li *ngFor="let user of users_list">
-          <form #f="ngForm"  (ngSubmit)="onSubmitUserDetails(f.value)">
-          <button class="box"   id="{{ user.id }}">
-            <input type="hidden" name="userId" ngModel #userId="ngModel" [ngModel]="user.id">
+        <li *ngFor="let user of users_list | filter : searchText" (click)="getUserProfileId(user.id)">
+          <div class="box"   id="{{ user.id }}" (click)="onSubmitUserDetails()">
             <div class="image">
               <img src="http://via.placeholder.com/40x40" />
             </div>
             <div class="user-info">
               <!-- vratiti obican tekst -->
-              <b ><input type="text" name="name" [disabled]="true" ngModel #name="ngModel" [ngModel]="user.name"></b>
-
-              <span ><input type="text" name="username" [disabled]="true" ngModel #name="ngModel" [ngModel]="user.username"></span>
-              <span ><input type="text" name="email" [disabled]="true" ngModel #name="ngModel" [ngModel]="user.email"></span>
+              <b>{{ user.name }}</b>
+              <span>{{user.username}}</span>
+              <span>{{user.email}}</span>
             </div>
-          </button>
-          </form>
+          </div>
         </li>
       </ul>
     </div>
@@ -46,15 +42,13 @@
       <div class="empty-text">Select a user first</div>
       <div class="check-list">
         <ul>
-          <li *ngFor="let album of album_list; let x = index">
-            <form #check="ngForm" (ngSubmit)="onSubmitAlbum(check.value)">
-            <button>
+          <li *ngFor="let album of album_list; let x = index" [hidden]="album.userId != userProfileId" (click)="getAlbumId(album.id)">
+            <form  (click)="onSubmitAlbum()">
               <label for="{{ album.albumId }}">
-                <input type="checkbox" name="albumId" ngModel #albumId="ngModel" [ngModel]="album.albunId" id="{{ album.albumId }}"/>
+                <input type="checkbox" name="albumId" id="{{ album.albumId }}"/>
                 {{ album.title }}
               </label>
                 <span>{{ x }} Photos</span>
-            </button>
             </form>
           </li>
         </ul>
@@ -62,14 +56,14 @@
     </div><!-- user-album -->
     <div class="user-photos">
       <div class="header">
-        <h4>0 Photos</h4>
+        <h4>Photos</h4>
         <div class="sort-photo">
           <fa name="align-left"></fa>
         </div>
       </div>
       <div class="photos-list">
         <ul>
-          <li *ngFor="let photo of photos_list">
+          <li *ngFor="let photo of photos_list" [hidden]="photo.albumId != userAlbumId" >
             <img src="{{ photo.url }}" />
           </li>
         </ul>
