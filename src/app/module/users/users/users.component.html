@@ -9,13 +9,13 @@
       <div class="search-field" [ngClass]="{hide: !searchForm, show: searchForm}">
         <fa name="arrow-left" (click)="closeSearch()"></fa>
         <input [(ngModel)]="searchText" placeholder="Search users">
-        <fa name="times" (click)="closeSearch()"></fa>
+        <fa name="times" (click)="deleteSearch()"></fa>
       </div>
     </div><!-- header-bar -->
     <div class="scroll-bar">
       <ul>
         <li *ngFor="let user of users_list | filter : searchText" (click)="getUserProfileId(user.id)">
-          <div class="box"   id="{{ user.id }}" (click)="onSubmitUserDetails()">
+          <div class="box"   id="{{ user.id }}" (click)="onSubmitUserDetails(user.id)">
             <div class="image">
               <img src="http://via.placeholder.com/40x40" />
             </div>

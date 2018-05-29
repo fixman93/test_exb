@@ -11,44 +11,56 @@ import { HttpClient } from "@angular/common/http";
 })
 
 export class UsersComponent implements OnInit {
-  userProfileId: any;
-  userAlbumId: any;
+  userProfileId: any
+  userAlbumId: any
   users_list = []
   album_list = []
   photos_list = []
+  public searchForm = false
+  searchText: string
   constructor(private httpClient: HttpClient) {
     this.httpClient.get("https://jsonplaceholder.typicode.com/users/").subscribe(
       success => {
-        this.users_list = success as any;
+        this.users_list = success as any
       }
-    );
+    )
   }
   ngOnInit() {
 
   }
-  onSubmitUserDetails() {
+  onSubmitUserDetails(x) {
+
     this.httpClient.get("https://jsonplaceholder.typicode.com/albums/").subscribe(
       success => {
           this.album_list = success as any
+          console.log(x)
+          console.log(this.album_list)
+          //if ( this.album_list == x ) {
+            /*for (let i = 0; i < this.album_list.length; i++) {
+              console.log(this.album_list[i])
+            }*/
       }
-    );
+    )
   }
   onSubmitAlbum(a) {
     this.httpClient.get("https://jsonplaceholder.typicode.com/photos/").subscribe(
       success => {
         this.photos_list = success as any
       }
-    );
+    )
   }
   getUserProfileId(param) {
-    this.userProfileId = param;
+    this.userProfileId = param
   }
   getAlbumId(p) {
-    console.log(p);
-    this.userAlbumId = p;
+
+    this.userAlbumId = p
   }
-  public searchForm = false;
   closeSearch() {
-    this.searchForm = false;
+    this.searchForm = false
+  }
+  deleteSearch() {
+    this.searchText = ''
+    this.searchForm = false
   }
 }
